@@ -10,6 +10,7 @@
     "pocketbase:setup": "node scripts/pocketbase-setup.mjs"
   },
   "dependencies": {
+    "@babel/runtime": "^8.0.0",
     "@hookform/resolvers": "^3.9.0",
     "@next/swc-wasm-nodejs": "^16.3.1",
     "clsx": "^2.1.1",
