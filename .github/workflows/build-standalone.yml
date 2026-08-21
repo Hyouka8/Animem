@@ -1,0 +1,26 @@
+name: Build Next.js Standalone
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+      - name: Copy Static Assets
+        run: |
+          cp -r .next/static .next/standalone/.next/
+          cp -r public .next/standalone/ || true
+      - name: Deploy Standalone Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .next/standalone
+          publish_branch: build-standalone
